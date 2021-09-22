@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import {  useState } from "react"
 import TodoItem from "./TodoItem"
 import  { Days, Month } from '../services/getDate'
 
