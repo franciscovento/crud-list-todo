@@ -48,8 +48,17 @@ const TodoContainer = () => {
 
     const handleDelete = (id) => {
         const deleteTodos = [...tareas];
+
         deleteTodos.splice(id, 1);
+       
         setTareas(deleteTodos);
+    }
+
+    const handleUpdate = (id) => {
+        const updateTodos = [...tareas];
+        updateTodos.splice(id, 1, {task: tareas[id].task, status: !tareas[id].status})
+        setTareas(updateTodos);
+        
     }
     
 const month = Month[new Date().getMonth()];
@@ -72,7 +81,7 @@ const day = Days[new Date().getDay()];
         </form>
     </div>
     <div className='max-h-80 overflow-y-auto w-full' id='taskcontainer-scroll'>
-      {tareas.map((x,i) => <TodoItem key={i} task={x.task} status={x.status} id={i} handleDelete={handleDelete}  />)}
+      {tareas.map((x,i) => <TodoItem key={i} task={x.task} status={x.status} id={i} handleUpdate={handleUpdate} handleDelete={handleDelete}  />)}
     </div>
     </div>
   )
