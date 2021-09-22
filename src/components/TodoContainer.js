@@ -1,10 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import TodoItem from "./TodoItem"
 import  { Days, Month } from '../services/getDate'
 
 const arrayTask = [
     {
-        task: "Sacar a pasear al perro",
+        task: "sacar a pasear al perro",
         status: true
     },
     {
@@ -21,8 +21,14 @@ const arrayTask = [
 
 const TodoContainer = () => {
 
+    
+
     const [tareas, setTareas] = useState(arrayTask);
     const [currentTask, setCurrentTask] = useState("");
+
+    
+ 
+
 
     const handleChangue = (e) => {
         setCurrentTask(e.target.value)
