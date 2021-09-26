@@ -57,11 +57,14 @@ const TodoContainer = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setContador(prev => prev + 1);
-        if(currentTask !== ""){
-        setTareas([...tareas, {id:contador, task: currentTask, status: false}])
-       setCurrentTask("");
-        }else{
+        if(currentTask === ""){
             alert("Debes ingresar una tarea");
+        }else if (tareas.find(x => x.task.toLowerCase() === currentTask.toLowerCase())) {
+            alert("Esa tarea ya existe, agrega otra")
+        }
+        else{
+            setTareas([...tareas, {id:contador, task: currentTask, status: false}])
+            setCurrentTask("");
         }
     }
 
@@ -87,7 +90,9 @@ const TodoContainer = () => {
         
     }
 
-    
+    const handleEmptyTrash = () => {
+        setEliminados("");
+    }
     
 const month = Month[new Date().getMonth()];
 const date = new Date().getDate();
@@ -125,7 +130,7 @@ useEffect(()=> {
                 {tareas.length > 0? tareas.map((x,i) => <TodoItem key={i} task={x.task} status={x.status} id={x.id} handleUpdate={handleUpdate} handleDelete={handleDelete}/>): 'Sin tareas'}
             </Route>
             <Route path='/eliminados'>
-                {eliminados ? eliminados.map((x,i) => <Eliminados key={i} task={x.task} />) : "Papelera vacía"}
+                {eliminados ? <div className='text-center'> {eliminados.map((x,i) => <Eliminados key={i} task={x.task} />)} <button onClick={handleEmptyTrash} className='mt-5 transition-all hover:text-red-500 hover:underline'>Vaciar papelera</button> </div> : "Papelera vacía"}
             </Route>
             <Route path='/realizados'>
                 {tareas.filter(x => x.status === true).length > 0? tareas.filter(x => x.status === true).map((x,i) => <Realizados key={i} task={x.task} status={x.status} id={x.id} handleUpdate={handleUpdate} handleDelete={handleDelete}/>): 'No hay tareas realizadas'}

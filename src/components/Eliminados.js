@@ -6,6 +6,7 @@ const Eliminados = ({task}) => {
         <div className='flex items-center gap-2'>
         <input type="checkbox" className='checked:bg-red-400' defaultChecked={true} />  
         <h2 className={'line-through text-gray-400'}>{task}</h2>
+        
     </div>
 </div>
   )
