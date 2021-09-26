@@ -104,7 +104,7 @@ useEffect(()=> {
 
   return (
     <Router>
-    <div className='bg-white p-5 sm:p-10 rounded-md shadow-2xl'>
+    <div className='bg-white p-5 sm:p-10 rounded-md shadow-2xl min-h-600 min-w-320 sm:min-w-460 relative'>
         <div className='flex justify-between items-center '>
         <h2 className='text-purple-700 font-semibold text-3xl'>{day}, <span className='text-purple-500'>{date}th</span></h2>
         <p className='text-gray-400 font-semibold'>{tareas.length} Task</p>
@@ -114,8 +114,8 @@ useEffect(()=> {
         <form onSubmit={(e) => handleSubmit(e)}>
         <input className='mt-4 mb-2 border-b-2 outline-none w-full' type="text" onChange={(e) => handleChangue(e)} value={currentTask} placeholder='What do you have to do today?' />
         <div className='flex items-center justify-between mb-4'>
-            <Link to='/'>← Ver todos</Link>
-            <button className='bg-purple-500 px-3 py-1 float-right	text-white rounded text-xl ' type='submit'>+</button>
+            <Link className='transition-all hover:text-purple-600' to='/'>← Ver todos</Link>
+            <button className='bg-purple-500 px-3 py-1 float-right	text-white rounded text-xl transition-all hover:bg-purple-600' type='submit'>+</button>
         </div>
         </form>
     </div>
@@ -137,10 +137,10 @@ useEffect(()=> {
 
 
     </div>
-    <div className='flex gap-5 justify-center mt-10 '>
-        <Link to='/realizados' className='bg-green-500 px-2 text-gray-100 rounded py-1'>Realizados</Link>
-        <Link to='/pendientes' className='bg-yellow-500 px-2 text-gray-100 rounded py-1'>Pendientes</Link>
-        <Link to='/eliminados' className='bg-gray-500 px-2 text-gray-100 rounded py-1'>Papelera</Link>
+    <div className='flex gap-5 justify-center mt-10 absolute -inset-x-0 bottom-6'>
+        <Link to='/realizados' className='bg-green-500 px-2 text-gray-100 rounded py-1 transition-all hover:bg-green-600 '>Realizados</Link>
+        <Link to='/pendientes' className='bg-yellow-500 px-2 text-gray-100 rounded py-1 transition-all hover:bg-yellow-600' >Pendientes</Link>
+        <Link to='/eliminados' className='bg-gray-500 px-2 text-gray-100 rounded py-1 transition-all hover:bg-gray-600 '>Papelera</Link>
     </div>
     </div>
     </Router>
