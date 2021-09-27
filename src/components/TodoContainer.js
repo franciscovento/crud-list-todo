@@ -46,6 +46,12 @@ const TodoContainer = () => {
             setEliminados(JSON.parse(eliminadosLocalStorage))
         }
 
+        if(localStorage.getItem("contador")){
+            const contadorIds = Number(localStorage.getItem("contador"))
+            setContador(contadorIds);
+            
+        }
+
     },[])
 
 
@@ -103,8 +109,9 @@ useEffect(()=> {
 
     localStorage.setItem("taks", JSON.stringify(tareas));
     localStorage.setItem("eliminados", JSON.stringify(eliminados));
+    localStorage.setItem("contador",JSON.stringify(contador));
 
-},[tareas, eliminados])
+},[tareas, eliminados, contador])
 
 
   return (
