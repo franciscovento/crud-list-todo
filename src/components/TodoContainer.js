@@ -1,32 +1,33 @@
-import {  useEffect, useState } from "react"
+import {  useEffect, useState, useContext } from "react"
 import TodoItem from "./TodoItem"
 import  { Days, Month } from '../services/getDate'
 import Eliminados from "./Eliminados"
+import { TodoContext } from "../context/TodoProvider"
 
 
-
-const arrayTask = [
-    {
-        id: 1,
-        task: "sacar a pasear al perro",
-        status: true
-    },
-    {
-        id: 2,
-        task: "ir al cine",
-        status: false
-    },
-    {
-        id: 3,
-        task: "tarea de academlo",
-        status: false
-    }
-]
+// const arrayTask = [
+//     {
+//         id: 1,
+//         task: "sacar a pasear al perro",
+//         status: true
+//     },
+//     {
+//         id: 2,
+//         task: "ir al cine",
+//         status: false
+//     },
+//     {
+//         id: 3,
+//         task: "tarea de academlo",
+//         status: false
+//     }
+// ]
 
 
 
 const TodoContainer = () => {
 
+    const {arrayTask} = useContext(TodoContext)
 
     const [tareas, setTareas] = useState(arrayTask);
     const [currentTask, setCurrentTask] = useState("");
@@ -97,9 +98,7 @@ const TodoContainer = () => {
         setEliminados("");
     }
     
-const month = Month[new Date().getMonth()];
-const date = new Date().getDate();
-const day = Days[new Date().getDay()];
+
 
 
 useEffect(()=> {
@@ -109,6 +108,8 @@ useEffect(()=> {
     localStorage.setItem("contador",JSON.stringify(contador));
 
 },[tareas, eliminados, contador])
+
+
 
 const filterRender = (filter) => {
     switch(filter){
@@ -128,7 +129,9 @@ const filterRender = (filter) => {
     }
   }
 
-
+  const month = Month[new Date().getMonth()];
+  const date = new Date().getDate();
+  const day = Days[new Date().getDay()];
 
 
   return (
@@ -149,7 +152,7 @@ const filterRender = (filter) => {
         </form>
     </div>
     <div className='max-h-80 overflow-y-auto w-full' id='taskcontainer-scroll'>
-        {filter !== 'eliminados' ? filterRender(filter).map(x => <TodoItem  task={x.task} status={x.status} handleUpdate={handleUpdate} id={x.id} handleDelete={handleDelete}/>) : <div className='text-center'> {eliminados && eliminados.map((x,i) => <Eliminados key={i} task={x.task} />)} <button onClick={handleEmptyTrash} className='mt-5 transition-all hover:text-red-500 hover:underline'>Vaciar papelera</button> </div> }
+        {filter !== 'eliminados' ? filterRender(filter).map(x => <TodoItem key={x.id}  task={x.task} status={x.status} handleUpdate={handleUpdate} id={x.id} handleDelete={handleDelete}/>) : <div className='text-center'> {eliminados && eliminados.map((x,i) => <Eliminados key={i} task={x.task} />)} <button onClick={handleEmptyTrash} className='mt-5 transition-all hover:text-red-500 hover:underline'>Vaciar papelera</button> </div> }
     </div>
     <div className='flex gap-5 justify-center mt-10 absolute -inset-x-0 bottom-6'>
         <button className='bg-green-500 px-2 text-gray-100 rounded py-1 transition-all hover:bg-green-600 ' onClick={()=> {setFilter('completed')}}> Completed</button>
