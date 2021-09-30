@@ -1,4 +1,4 @@
-import {  useEffect, useState, useContext } from "react"
+import {  useEffect, useState, useContext, useRef } from "react"
 import TodoItem from "./TodoItem"
 import  { Days, Month } from '../services/getDate'
 import Deleted from "./Deleted"
@@ -47,7 +47,9 @@ const TodoContainer = () => {
         }
         else{
             setTask([...task, {id:counter, task: currentTask, status: false}])
+
             setCurrentTask("");
+            inputRef.current.focus();
         }
     }
 
@@ -112,6 +114,8 @@ const filterRender = (filter) => {
   const date = new Date().getDate();
   const day = Days[new Date().getDay()];
 
+  const inputRef = useRef();
+
 
   return (
    
@@ -123,7 +127,7 @@ const filterRender = (filter) => {
         <p className='text-gray-400'>{month}</p>
     <div>
         <form onSubmit={(e) => handleSubmit(e)}>
-        <input className='mt-4 mb-2 border-b-2 outline-none w-full' type="text" onChange={(e) => handleChangue(e)} value={currentTask} placeholder='What do you have to do today?' />
+        <input ref={inputRef} className='mt-4 mb-2 border-b-2 outline-none w-full' type="text" onChange={(e) => handleChangue(e)} value={currentTask} placeholder='What do you have to do today?' />
         <div className='flex items-center justify-between mb-4'>
             <div onClick={()=> {setFilter('all')}} className='transition-all hover:text-purple-600 cursor-pointer'> ← Ver todos</div>
             <button className='bg-purple-500 px-3 py-1 float-right	text-white rounded text-xl transition-all hover:bg-purple-600' type='submit'>+</button>
