@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Eliminados = ({task}) => {
+const Deleted = ({task}) => {
   return (
     <div className='flex gap-5 items-center justify-between w-72 sm:w-96'>
         <div className='flex items-center gap-2'>
@@ -12,4 +12,4 @@ const Eliminados = ({task}) => {
   )
 }
 
-export default Eliminados
+export default Deleted
